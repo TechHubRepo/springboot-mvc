@@ -17,7 +17,7 @@ Follow the following steps to install application
 		$ sudo apt-get install git -y
 		
 	Step 5 : Clone as following
-		$ git clone https://<access_token>@github.com/TechHubRepo/springboot-maven-demo.git
+		$ git clone https://<access_token>@github.com/TechHubRepo/springboot-mvc.git
 	  
 # How to Run
 Goto project cloning directory and use any one option from following to run the application
