@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" th:href="@{/css/custom.css}"/>
+<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+<title>DASHBOARD - CUSTOMER</title>
+</head>
+<body>
+	<div align="center">
+		<h1>Welcome to Customer Dashboard</h1>
+		<a class="btn btn-success" href="./add-customer" role="button">Add New Customer</a>
+		<a class="btn btn-info" href="./view-customer?idx=0&lmt=10" role="button">View Customer</a>
+		<a class="btn btn-danger" href="./delete-customer" role="button">Delete Customer</a>
+   </div>
+</body>
+</html>

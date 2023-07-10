@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" th:href="@{/css/custom.css}"/>
+<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+<title>SUCCESS</title>
+</head>
+<body>
+	<div align="center">
+		<div class="alert alert-success" role="alert" th:text="*{msg}">	  		
+		</div>
+		<a class="btn btn-success" href="./" role="button">Home Dashboard</a>
+	</div>
+</body>
+</html>

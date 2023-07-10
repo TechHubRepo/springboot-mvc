@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" th:href="@{/css/custom.css}"/>
+<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+<title>VIEW - CUSTOMER</title>
+</head>
+<body>
+	<div align="center">
+		<h1>Welcome to Customer Dashboard</h1>
+		<a class="btn btn-success" href="./add-customer" role="button">Add New Customer</a>
+		<a class="btn btn-info" href="./view-customer?idx=0&lmt=10"	role="button">View Customer</a>
+		<a class="btn btn-danger" href="./delete-customer" role="button">Delete Customer</a>
+	</div>
+	<hr/>
+	<div style="padding: 50px">
+		<h1>View the Customer</h1>
+		<div class="list-group" th:each="customerDTO : ${customerDTOs}">
+			<div class="list-group-item list-group-item-action"
+				aria-current="true">
+				<div class="d-flex w-100 justify-content-between">
+					<h4 class="mb-1" th:text="${customerDTO.customerId+' : '+customerDTO.customerName}"></h4><br/>
+					<h5 class="mb-1" th:text="${'Price : &#8377 '+customerDTO.price}"></h5>
+					<small th:text="${customerDTO.updatedOn}"></small>
+				</div>
+				<p class="mb-1" th:text="${customerDTO.description}"></p> 
+				<small  th:text="${customerDTO.createdOn}"></small><br/>
+				<small  th:text="${'Gender : '+customerDTO.gender}"></small><br/>
+				<small  th:text="${'Date Of Birth : '+customerDTO.dateOfBirth}"></small><br/>
+				<small  th:text="${'MobileNumber : '+customerDTO.mobileNumber}"></small><br/>
+				<small  th:text="${'Email : '+customerDTO.emailId}"></small><br/>
+				<small>Services</small>
+				<ul th:each="service : ${customerDTO.servicesTaken}">
+				    <li th:text="${service}"></li>
+				</ul>
+				<a th:href="@{/update-customer/{cid}(cid=${customerDTO.customerId})}" class="btn btn-primary">Edit</a>			
+				<form action="./delete-customer" method="post">					
+					<input type="hidden" name="cid"class="form-control" th:value="${customerDTO.customerId}">						
+					<button type="submit"  class="btn btn-danger">Delete</button>
+				</form>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
