@@ -1,5 +1,5 @@
 # Spring Security with Springboot 3
-Welcome to Springboot 2 Security sample project using Springboot and Maven
+Welcome to Springboot MVC Demo Project
 
 # Setup
 Follow the following steps to install application
@@ -24,6 +24,11 @@ Goto project cloning directory and use any one option from following to run the 
 
 	Option 1
 		$ mvn spring-boot:run
-	Option 2
-		Step 1 :  $ mvn clean compile package
-		Step 2 :  $ java -jar target/bookstore.war
+
+# How to Build Docker Image
+Follow the following steps to make docker image
+
+    $ mvn clean package
+    $ docker image build -t techeduhub/mvcdemo:latest .
+    $ docker push techeduhub/mvcdemo:latest
+

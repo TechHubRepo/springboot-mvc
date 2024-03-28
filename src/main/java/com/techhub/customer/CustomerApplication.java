@@ -1,5 +1,6 @@
 package com.techhub.customer;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -13,6 +14,7 @@ import org.thymeleaf.spring6.view.ThymeleafViewResolver;
  * @author ramniwash
  */
 @SpringBootApplication
+
 public class CustomerApplication {
 
 	public static void main(String[] args) {

@@ -9,11 +9,11 @@
 		<relativePath />
 	</parent>
 	<groupId>com.techhub</groupId>
-	<artifactId>SpringbootMVCDemo</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<artifactId>mvc-demo</artifactId>
+	<version>latest</version>
 	<packaging>war</packaging>
-	<name>SpringbootMVCDemo</name>
-	<description>PhoneBook Project</description>
+	<name>mvc-demo</name>
+	<description>Spring boot MVC Demo Project</description>
 	<properties>
 		<java.version>17</java.version>
 	</properties>

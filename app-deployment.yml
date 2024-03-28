@@ -1,0 +1,72 @@
+--- # Define the Application Deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mvcdemo-deployment
+spec:
+  strategy:
+    type: RollingUpdate
+  selector:
+    matchLabels:
+      app: mvcdemo
+  replicas: 2
+  template:
+    metadata:
+      name: mvcdemo
+      labels:
+        app: mvcdemo
+    spec:
+      containers:
+      - name: mvcdemo-container
+        image: techeduhub/mvcdemo:latest
+        resources:
+          limits:
+            memory: "500Mi"
+            cpu: 1
+        ports:
+        - containerPort: 8080
+        env:   
+        - name: MYSQL_DB_HOST
+          valueFrom:
+            configMapKeyRef:
+              name: db-config
+              key: host
+        - name: MYSQL_DB_NAME_CUSTOMER_SERVICE
+          valueFrom:
+            configMapKeyRef :
+              name: db-config
+              key:  dbName
+        - name: MYSQL_DB_USERNAME
+          valueFrom :
+            secretKeyRef :
+              name : db-secrets
+              key :  username
+        - name: MYSQL_DB_PASSWORD
+          valueFrom :
+            secretKeyRef :
+              name : mysql-secrets
+              key :  password
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: appName
+                operator: In
+                values:
+                - samplejob
+
+
+--- # Define the Application NodePort service
+apiVersion: v1
+kind: Service
+metadata:
+  name: mvcdemo-service
+spec:
+  selector:
+    app: springboot-k8s-mysql
+  ports:
+    - protocol: "TCP"
+      port: 8080
+      targetPort: 8080
+  type: NodePort
