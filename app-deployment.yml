@@ -22,7 +22,7 @@ spec:
         resources:
           limits:
             memory: "500Mi"
-            cpu: 1
+            cpu: "500millis"
         ports:
         - containerPort: 8080
         env:   
@@ -54,7 +54,7 @@ spec:
               - key: appName
                 operator: In
                 values:
-                - samplejob
+                - mvcdemoApp
 
 
 --- # Define the Application NodePort service

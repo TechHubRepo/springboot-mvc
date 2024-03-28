@@ -60,7 +60,7 @@ spec:
             - name: MYSQL_ROOT_PASSWORD
               valueFrom :
                 secretKeyRef :
-                  name : mysql-secrets
+                  name : db-secrets
                   key :  password
             - name: MYSQL_DATABASE
               valueFrom :
@@ -85,7 +85,7 @@ spec:
                   - key: appName
                     operator: In
                     values:
-                      - samplejob
+                      - mvcdemoDB
 
 
 --- # Define a Service To Expose mysql to Other Services

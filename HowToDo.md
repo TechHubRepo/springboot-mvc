@@ -1,26 +1,31 @@
 # Connect with EC2 instance
 
-    $ ssh -i ${AWS_KEY} ubuntu@13.201.132.1
+    $ ssh -i ${AWS_KEY} ubuntu@3.109.55.164
     $ sudo systemctl daemon-reload
     $ sudo systemctl restart kubelet
     $ sudo systemctl status kubelet
 
-# Create AppData directory in node
+# Create AppData directory in worker node 2
 
-    $ ssh -i ${AWS_KEY} ubuntu@3.110.156.56
+    $ ssh -i ${AWS_KEY} ubuntu@65.0.73.219
+    $ cd ..
+    $ cd ..
     $ sudo mkdir AppData
     $ sudo chmod -R 777 AppData
 
 # Copy the local files to EC2
 
-    $ scp -i ${AWS_KEY} config.yml ubuntu@13.201.132.1:/home/ubuntu/ws
-    $ scp -i ${AWS_KEY} db-deployment.yml ubuntu@13.201.132.1:/home/ubuntu/ws
-    $ scp -i ${AWS_KEY} app-deployment.yml ubuntu@13.201.132.1:/home/ubuntu/ws
+    $ scp -i ${AWS_KEY} config.yml ubuntu@3.109.55.164:/home/ubuntu/ws
+    $ scp -i ${AWS_KEY} db-deployment.yml ubuntu@3.109.55.164:/home/ubuntu/ws
+    $ scp -i ${AWS_KEY} app-deployment.yml ubuntu@3.109.55.164:/home/ubuntu/ws
 
 # Label the nodes
 
-    $ kubectl label nodes workernode1 appName=mvcdemo
-    $ kubectl label nodes workernode2 appName=mywebapp
+    $ kubectl label nodes workernode1 appName-
+    $ kubectl label nodes workernode2 appName-
+    $ kubectl label nodes workernode1 appName=mvcdemoApp
+    $ kubectl label nodes workernode2 appName=mvcdemoDB
+    $ kubectl get nodes --show-labels
 
 # Create the Configuration
 
@@ -33,33 +38,35 @@
 
 # See the Objects
 
-     $ kubectl get pods -n default
-     $ kubectl get configmaps -n default
-     $ kubectl get secrets -n default
-     $ kubectl get persistentvolumes -n default
-     $ kubectl get persistentvolumeclaims -n default
-     $ kubectl get deployments -n default
-     $ kubectl get services -n default
+    $ kubectl get pods -n default -o wide
+    $ kubectl get configmaps -n default -o wide
+    $ kubectl get secrets -n default -o wide
+    $ kubectl get persistentvolumes -n default -o wide
+    $ kubectl get persistentvolumeclaims -n default -o wide
+    $ kubectl get deployments -n default -o wide
+    $ kubectl get services -n default -o wide
 
 # Describe the Objects
 
-     $ kubectl describe configmap NAME -n default
-     $ kubectl describe secret NAME -n default
-     $ kubectl describe persistentvolume NAME -n default
-     $ kubectl describe persistentvolumeclaim NAME -n default
-     $ kubectl describe deployment NAME -n default
-     $ kubectl describe service NAME -n default
-     $ kubectl describe pod mysql-58b86c5997-qv2z9 -n default
-
+    $ kubectl describe configmap db-config -n default
+    $ kubectl describe secret db-secrets -n default
+    $ kubectl describe persistentvolume mypv -n default
+    $ kubectl describe persistentvolumeclaim mysql-pv-claim -n default
+    $ kubectl describe deployment mysql -n default
+    $ kubectl describe deployment mvcdemo-deployment -n default
+    $ kubectl describe service mysql -n default
+    $ kubectl describe service mvcdemo-service -n default
+    $ kubectl describe pod mysql-6dbc96597-qnrxt -n default
+    $ kubectl describe pod mvcdemo-deployment-6d748fb56d-8g5b8 -n default
+    $ kubectl describe pod mvcdemo-deployment-6d748fb56d-s8jc4 -n default
 
 # Delete the Objects
 
-     $ kubectl delete configmaps db-config -n default
-     $ kubectl delete secrets db-secrets -n default
-     $ kubectl delete persistentvolume mypv -n default
-     $ kubectl delete persistentvolumeclaim mysql-pv-claim -n default
-     $ kubectl delete deployments mysql -n default
-     $ kubectl delete deployments mvcdemo-deployment -n default
-     $ kubectl delete services mvcdemo-service -n default
-     $ kubectl delete services mysql -n default
-
+    $ kubectl delete configmaps db-config -n default
+    $ kubectl delete secrets db-secrets -n default
+    $ kubectl delete persistentvolume mypv -n default
+    $ kubectl delete persistentvolumeclaim mysql-pv-claim -n default
+    $ kubectl delete deployments mysql -n default
+    $ kubectl delete deployments mvcdemo-deployment -n default
+    $ kubectl delete services mvcdemo-service -n default
+    $ kubectl delete services mysql -n default
