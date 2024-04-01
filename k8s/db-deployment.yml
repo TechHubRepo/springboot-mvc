@@ -85,7 +85,7 @@ spec:
                   - key: appName
                     operator: In
                     values:
-                      - mvcdemoDB
+                      - mvcdemoApp
 
 
 --- # Define a Service To Expose mysql to Other Services

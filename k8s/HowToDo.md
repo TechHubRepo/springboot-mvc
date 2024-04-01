@@ -1,13 +1,13 @@
 # Connect with EC2 instance
 
-    $ ssh -i ${AWS_KEY} ubuntu@3.109.55.164
+    $ ssh -i ${AWS_KEY} ubuntu@52.66.30.159
     $ sudo systemctl daemon-reload
     $ sudo systemctl restart kubelet
     $ sudo systemctl status kubelet
 
-# Create AppData directory in worker node 2
+# Create AppData directory in worker node 1
 
-    $ ssh -i ${AWS_KEY} ubuntu@65.0.73.219
+    $ ssh -i ${AWS_KEY} ubuntu@13.201.56.87
     $ cd ..
     $ cd ..
     $ sudo mkdir AppData
@@ -15,9 +15,9 @@
 
 # Copy the local files to EC2
 
-    $ scp -i ${AWS_KEY} config.yml ubuntu@3.109.55.164:/home/ubuntu/ws
-    $ scp -i ${AWS_KEY} db-deployment.yml ubuntu@3.109.55.164:/home/ubuntu/ws
-    $ scp -i ${AWS_KEY} app-deployment.yml ubuntu@3.109.55.164:/home/ubuntu/ws
+    $ scp -i ${AWS_KEY} k8s/config.yml ubuntu@13.201.56.87:/home/ubuntu/ws
+    $ scp -i ${AWS_KEY} k8s/db-deployment.yml ubuntu@13.201.56.87:/home/ubuntu/ws
+    $ scp -i ${AWS_KEY} k8s/app-deployment.yml ubuntu@13.201.56.87:/home/ubuntu/ws
 
 # Label the nodes
 
@@ -56,7 +56,7 @@
     $ kubectl describe deployment mvcdemo-deployment -n default
     $ kubectl describe service mysql -n default
     $ kubectl describe service mvcdemo-service -n default
-    $ kubectl describe pod mysql-6dbc96597-qnrxt -n default
+    $ kubectl describe pod mysql-77fdffb894-lqbbs -n default
     $ kubectl describe pod mvcdemo-deployment-6d748fb56d-8g5b8 -n default
     $ kubectl describe pod mvcdemo-deployment-6d748fb56d-s8jc4 -n default
 
