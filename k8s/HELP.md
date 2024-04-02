@@ -4,7 +4,6 @@
 
 # Copy the local files to EC2
 
-    $ scp -i ${AWS_KEY} k8s/config.yml ubuntu@[IP_ADDRESS]:/home/ubuntu/k8s
     $ scp -i ${AWS_KEY} k8s/db-deployment.yml ubuntu@[IP_ADDRESS]:/home/ubuntu/k8s
     $ scp -i ${AWS_KEY} k8s/app-deployment.yml ubuntu@[IP_ADDRESS]:/home/ubuntu/k8s
 
@@ -44,13 +43,9 @@
     $ kubectl label nodes minikube appName=mvcdemoApp
     $ kubectl get nodes --show-labels
 
-# Create the Configuration
-
-    $ kubectl apply -f k8s/config.yml
-
 # Create the Deployments
 
-    $ kubectl apply -f k8s/db-deployment.yml
+    $ kubectl apply -f k8s/mysql-deployment.yml
     $ kubectl apply -f k8s/app-deployment.yml
 
 # See the Objects
@@ -65,16 +60,7 @@
 
 # Describe the Objects
 
-    $ kubectl describe configmap db-config -n default
-    $ kubectl describe secret db-secrets -n default
-    $ kubectl describe persistentvolume mypv -n default
-    $ kubectl describe persistentvolumeclaim mysql-pv-claim -n default
-    $ kubectl describe deployment mysql -n default
-    $ kubectl describe deployment mvcdemo-deployment -n default
-    $ kubectl describe service mysql -n default
-    $ kubectl describe service mvcdemo-service -n default
     $ kubectl describe pod mysql-77fdffb894-jffm4 -n default
-    $ kubectl describe pod mvcdemo-deployment-6d748fb56d-8g5b8 -n default
     $ kubectl describe pod mvcdemo-deployment-6d748fb56d-s8jc4 -n default
 
 # Delete the Objects
@@ -83,8 +69,8 @@
     $ kubectl delete persistentvolumeclaim mysql-pv-claim -n default
     $ kubectl delete persistentvolume mypv -n default
     $ kubectl delete deployments mvcdemo-deployment -n default
-    $ kubectl delete configmaps db-config -n default
-    $ kubectl delete secrets db-secrets -n default
+    $ kubectl delete configmaps mysql-config -n default
+    $ kubectl delete secrets mysql-secrets -n default
     $ kubectl delete services mysql -n default
     $ kubectl delete services mvcdemo-service -n default
     
