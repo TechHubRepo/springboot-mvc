@@ -1,4 +1,4 @@
-# Spring Security with Springboot 3
+# Spring boot MVC Demo
 Welcome to Springboot MVC Demo Project
 
 # Setup
