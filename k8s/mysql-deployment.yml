@@ -34,8 +34,8 @@ metadata:
   name: mysql-config
 data:
   host: mysql
-  port: 3306
-  databasename: mytestdb
+  port: '3308'
+  databasename : mytestdb
 
 --- # Define the Secret for database
 apiVersion : v1

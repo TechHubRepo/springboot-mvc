@@ -65,7 +65,7 @@
 
 # Delete the Objects
 
-    $ kubectl delete deployments mysql -n default
+    $ kubectl delete deployments mysql-deployment -n default
     $ kubectl delete persistentvolumeclaim mysql-pv-claim -n default
     $ kubectl delete persistentvolume mypv -n default
     $ kubectl delete deployments mvcdemo-deployment -n default
