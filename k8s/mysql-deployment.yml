@@ -29,11 +29,12 @@ spec:
 
 --- # Define the ConfigMap for database
 apiVersion : v1
-kind : ConfigMap
+kind: ConfigMap
 metadata:
-  name : mysql-config
+  name: mysql-config
 data:
-  host : mysql
+  host: mysql
+  port: 3306
   databasename: mytestdb
 
 --- # Define the Secret for database

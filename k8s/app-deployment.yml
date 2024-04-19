@@ -28,6 +28,11 @@ spec:
             configMapKeyRef:
               name: mysql-config
               key: host
+        - name: MYSQL_DB_PORT
+          valueFrom:
+            configMapKeyRef:
+              name: mysql-config
+              key: port
         - name: MYSQL_DB_NAME_CUSTOMER_SERVICE
           valueFrom:
             configMapKeyRef :
