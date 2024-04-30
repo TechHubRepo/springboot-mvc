@@ -34,7 +34,7 @@ metadata:
   name: mysql-config
 data:
   host: mysql
-  port: '3308'
+  port: "3308"
   databasename : mytestdb
 
 --- # Define the Secret for database
@@ -56,10 +56,12 @@ spec:
   selector:
     matchLabels:
       app: mysql
+      tier: database
   template:
     metadata:
       labels:
         app: mysql
+        tier: database
     spec:
       containers:
       - name: mysql-pod

@@ -73,5 +73,8 @@
     $ kubectl delete secrets mysql-secrets -n default
     $ kubectl delete services mysql -n default
     $ kubectl delete services mvcdemo-service -n default
-    
+
+# Connect with MySQL pod
+    $ kubectl exec -it mysql-deployment-7c66bcd6f-kbnxm -- /bin/bash
+        # mysql --user='root' --password='root'
 
