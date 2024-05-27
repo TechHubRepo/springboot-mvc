@@ -16,16 +16,13 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: mysql-pv-claim 
-  labels:
-    app: mysql
-    tier: database
+  name: mysql-pv-claim
 spec:
   accessModes:
     - ReadWriteMany
   resources:
     requests:
-      storage: 1Gi
+      storage: 2Gi
 
 --- # Define the ConfigMap for database
 apiVersion : v1
@@ -35,7 +32,7 @@ metadata:
 data:
   host: mysql
   port: "3308"
-  databasename : mytestdb
+  databasename : customer_service
 
 --- # Define the Secret for database
 apiVersion : v1
@@ -64,35 +61,35 @@ spec:
         tier: database
     spec:
       containers:
-      - name: mysql-pod
-        image: mysql:8.0.36
-        imagePullPolicy: IfNotPresent
-        resources:
-          limits:
-            memory: "512Mi"
-            cpu: "1"
-        ports:
-        - containerPort: 3306
-        env:
-        - name: MYSQL_ROOT_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: mysql-secrets
-              key: password
-        - name: MYSQL_DATABASE
-          valueFrom:
-            configMapKeyRef:
-              name: mysql-config
-              key: databasename
-        volumeMounts:
-        - name: mysql-persistent-storage
-          mountPath: /var/lib/mysql
+        - name: mysql-database-pod
+          image: mysql:8.0.36-debian
+          imagePullPolicy: Always
+          resources:
+            limits:
+              memory: "512Mi"
+              cpu: "1"
+          ports:
+            - containerPort: 3306
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-secrets
+                  key: password
+            - name: MYSQL_DATABASE
+              valueFrom:
+                configMapKeyRef:
+                  name: mysql-config
+                  key: databasename
+          volumeMounts:
+            - name: mysql-persistent-storage
+              mountPath: /var/lib/mysql
       volumes:
-      - name: mysql-persistent-storage
-        persistentVolumeClaim:
-          claimName: mysql-pv-claim
+        - name: mysql-persistent-storage
+          persistentVolumeClaim:
+            claimName: mysql-pv-claim
 
---- # Define a Service to expose mysql to other services
+--- # The service to expose mysql to other services
 apiVersion: v1
 kind: Service
 metadata:
