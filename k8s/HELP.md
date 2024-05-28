@@ -60,21 +60,22 @@
 
 # Describe the Objects
 
-    $ kubectl describe pod mysql-77fdffb894-jffm4 -n default
+    $ kubectl describe pod mysql-deployment-f654b7995-pctds -n default
     $ kubectl describe pod mvcdemo-deployment-6d748fb56d-s8jc4 -n default
 
 # Delete the Objects
 
     $ kubectl delete deployments mysql-deployment -n default
     $ kubectl delete persistentvolumeclaim mysql-pv-claim -n default
-    $ kubectl delete persistentvolume mypv -n default
+    $ kubectl delete persistentvolume mysql-pv -n default
     $ kubectl delete deployments mvcdemo-deployment -n default
     $ kubectl delete configmaps mysql-config -n default
-    $ kubectl delete secrets mysql-secrets -n default
+    $ kubectl delete secrets mysql-secret -n default
     $ kubectl delete services mysql -n default
     $ kubectl delete services mvcdemo-service -n default
 
 # Connect with MySQL pod
-    $ kubectl exec -it mysql-deployment-7c66bcd6f-kbnxm -- /bin/bash
+
+    $ kubectl exec -it mysql-deployment-f654b7995-dzdhv -- /bin/bash
         # mysql --user='root' --password='root'
 

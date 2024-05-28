@@ -20,7 +20,7 @@ import jakarta.persistence.Table;
  * @author ramniwash
  */
 @Entity
-@Table(schema = "TEST_DB", name = "CUSTOMERS")
+@Table(schema = "customer_service",name = "customers")
 public class Customer {
 
 	@Id

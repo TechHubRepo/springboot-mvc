@@ -1,7 +1,7 @@
 # Spring boot MVC Demo
-Welcome to Springboot MVC Demo Project
+Welcome to SpringBoot MVC Demo Project
 
-# Setup
+# Local Setup
 Follow the following steps to install application
 
 	Step 1 : Update the system packages
@@ -18,15 +18,36 @@ Follow the following steps to install application
 		
 	Step 5 : Clone as following
 		$ git clone https://<access_token>@github.com/TechHubRepo/springboot-mvc.git
-	  
+
+# Setup MySQL Database
+Install Docker
+
+    $ sudo apt-get update
+    $ sudo apt install docker.io -y
+    $ sudo groupadd docker
+    $ sudo usermod -aG docker ${USER}
+
+Create MySQL Container
+
+    $ docker run -d --name mysql-container -p 3306:3306 -e MYSQL_ROOT_PASSWORD=root -e MYSQL_DATABASE=customer_service mysql:8.0.36-debian
+    $ docker container start mysql-container
+    $ docker container stop mysql-container
+    $ docker container rm mysql-container
+
+Set the environment variable as following
+
+    MYSQL_DB_HOST=localhost
+    MYSQL_DB_PORT=3306
+    MYSQL_DB_USERNAME=root
+    MYSQL_DB_PASSWORD=root
+    MYSQL_DB_NAME_CUSTOMER_SERVICE=customer_service
+
 # How to Run
 Goto project cloning directory and use any one option from following to run the application
 
-	Option 1
-		$ mvn spring-boot:run
+	$ mvn spring-boot:run
 
 # How to Build Docker Image
-Follow the following steps to make docker image
 
     $ mvn clean package
     $ docker image build -t techeduhub/mvcdemo:latest .

@@ -9,7 +9,7 @@ spec:
   capacity:
     storage: 2Gi
   hostPath:
-    path: /AppData
+    path: /AppData/mysql
     type: Directory
 
 --- # Define PersistentVolumeClaim for mysql database
@@ -30,18 +30,18 @@ kind: ConfigMap
 metadata:
   name: mysql-config
 data:
-  host: mysql
-  port: "3308"
-  databasename : customer_service
+  hostName: mysql
+  portNumber: '3308'
+  databaseName: customer_service
 
 --- # Define the Secret for database
 apiVersion : v1
 kind : Secret
 metadata:
-  name : mysql-secrets
+  name : mysql-secret
 data:
-  username : cm9vdA==
-  password : cm9vdA==
+  username: cm9vdA==
+  password: cm9vdA==
 
 --- # Define the Deployment for database
 apiVersion: apps/v1
@@ -74,13 +74,13 @@ spec:
             - name: MYSQL_ROOT_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: mysql-secrets
+                  name: mysql-secret
                   key: password
             - name: MYSQL_DATABASE
               valueFrom:
                 configMapKeyRef:
                   name: mysql-config
-                  key: databasename
+                  key: databaseName
           volumeMounts:
             - name: mysql-persistent-storage
               mountPath: /var/lib/mysql
@@ -94,9 +94,6 @@ apiVersion: v1
 kind: Service
 metadata:
   name: mysql
-  labels:
-    app: mysql
-    tier: database
 spec:
   type: ClusterIP
   clusterIP: None

@@ -8,18 +8,17 @@ spec:
   selector:
     matchLabels:
       app: mvcdemo
+      tier: front-end
   template:
     metadata:
       labels:
         app: mvcdemo
+        tier: front-end
     spec:
       containers:
       - name: mvcdemo-container
         image: techeduhub/mvcdemo:latest
-        resources:
-          limits:
-            memory: "512Mi"
-            cpu: "1"
+        imagePullPolicy: Always
         ports:
         - containerPort: 8080
         env:   
@@ -27,27 +26,27 @@ spec:
           valueFrom:
             configMapKeyRef:
               name: mysql-config
-              key: host
+              key: hostName
         - name: MYSQL_DB_PORT
           valueFrom:
             configMapKeyRef:
               name: mysql-config
-              key: port
+              key: portNumber
         - name: MYSQL_DB_NAME_CUSTOMER_SERVICE
           valueFrom:
-            configMapKeyRef :
+            configMapKeyRef:
               name: mysql-config
-              key:  databasename
+              key: databaseName
         - name: MYSQL_DB_USERNAME
-          valueFrom :
-            secretKeyRef :
-              name : mysql-secrets
-              key :  username
+          valueFrom:
+            secretKeyRef:
+              name: mysql-secret
+              key: username
         - name: MYSQL_DB_PASSWORD
-          valueFrom :
-            secretKeyRef :
-              name : mysql-secrets
-              key :  password
+          valueFrom:
+            secretKeyRef:
+              name: mysql-secret
+              key: password
 
 --- # Define the Application NodePort service
 apiVersion: v1
@@ -58,6 +57,7 @@ spec:
   type: NodePort
   selector:
     app: mvcdemo
+    tier: front-end
   ports:
     - protocol: "TCP"
       port: 8080
