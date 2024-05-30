@@ -4,7 +4,7 @@
 
 # Copy the local files to EC2
 
-    $ scp -i ${AWS_KEY} k8s/db-deployment.yml ubuntu@[IP_ADDRESS]:/home/ubuntu/k8s
+    $ scp -i ${AWS_KEY} k8s/mysql-deployment.yml ubuntu@[IP_ADDRESS]:/home/ubuntu/k8s
     $ scp -i ${AWS_KEY} k8s/app-deployment.yml ubuntu@[IP_ADDRESS]:/home/ubuntu/k8s
 
 # Create AppData directory
