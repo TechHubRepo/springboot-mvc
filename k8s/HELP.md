@@ -64,18 +64,28 @@
     $ kubectl describe pod mvcdemo-deployment-6d748fb56d-s8jc4 -n default
 
 # Delete the Objects
-
-    $ kubectl delete deployments mysql-deployment -n default
+    
     $ kubectl delete persistentvolumeclaim mysql-pv-claim -n default
     $ kubectl delete persistentvolume mysql-pv -n default
-    $ kubectl delete deployments mvcdemo-deployment -n default
     $ kubectl delete configmaps mysql-config -n default
     $ kubectl delete secrets mysql-secret -n default
-    $ kubectl delete services mysql -n default
+    $ kubectl delete services mysql-service -n default
     $ kubectl delete services mvcdemo-service -n default
 
+    $ kubectl delete deployments mvcdemo-deployment -n default
+    $ kubectl delete deployments mysql-deployment -n default
+    
 # Connect with MySQL pod
 
     $ kubectl exec -it mysql-deployment-f654b7995-dzdhv -- /bin/bash
         # mysql --user='root' --password='root'
 
+# Access the Web Application
+    $ minikube ip
+    http://[MINIKUBE_IP]:30001
+
+# To Scale the Replicaset 
+
+    $ kubectl scale replicaset [RepliSet-name] --replicas=[numbers]
+    $ kubectl scale replicaset mysql-deployment-76796c49cb --replicas=3
+    $ kubectl scale replicaset mvcdemo-deployment-d5795f6f5 --replicas=3

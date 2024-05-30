@@ -3,6 +3,7 @@ kind: Deployment
 metadata:
   name: mvcdemo-deployment
 spec:
+  replicas: 3
   strategy:
     type: RollingUpdate
   selector:
@@ -59,8 +60,8 @@ spec:
     app: mvcdemo
     tier: front-end
   ports:
-    - protocol: "TCP"
-      port: 8080
-      targetPort: 8080
-  
+  - port: 8080
+    targetPort: 8080
+    nodePort: 30001
+
     
