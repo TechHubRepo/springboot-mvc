@@ -18,3 +18,8 @@ $ kubectl exec -it [POD_NAME] -- /bin/bash
 $ kubectl delete deployments mvcdemo-deployment -n default
 $ kubectl delete deployments mysql-deployment -n default
 
+--------------------------------------
+$ sudo systemctl daemon-reload
+$ sudo systemctl restart kubelet
+$ sudo systemctl status kubelet
+--------------------------------------
