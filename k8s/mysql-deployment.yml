@@ -64,10 +64,6 @@ spec:
       - name: mysql-database-pod
         image: mysql:8.0.36-debian
         imagePullPolicy: Always
-        resources:
-          limits:
-            memory: "512Mi"
-            cpu: "1"
         ports:
         - containerPort: 3306
         env:

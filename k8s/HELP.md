@@ -12,6 +12,7 @@
     $ sudo mkdir /AppData
     $ sudo chmod -R 777 /AppData
     $ sudo mkdir /AppData/mysql
+    $ sudo chmod -R 777 /AppData/mysql
 
 # Uninstall Minikube
 
@@ -52,15 +53,21 @@
     $ kubectl get pods -n default -o wide
     $ kubectl get configmaps -n default -o wide
     $ kubectl get secrets -n default -o wide
+
     $ kubectl get persistentvolumes -n default -o wide
+                    OR
+    $ kubectl get pv -n default -o wide
+
     $ kubectl get persistentvolumeclaims -n default -o wide
+                    OR
+    $ kubectl get pvc -n default -o wide
+
     $ kubectl get deployments -n default -o wide
     $ kubectl get services -n default -o wide
 
 # Describe the Objects
 
-    $ kubectl describe pod mysql-deployment-f654b7995-pctds -n default
-    $ kubectl describe pod mvcdemo-deployment-6d748fb56d-s8jc4 -n default
+    $ kubectl describe pod [POD_NAME] -n default
 
 # Delete the Objects
     
@@ -76,8 +83,11 @@
     
 # Connect with MySQL pod
 
-    $ kubectl exec -it mysql-deployment-f654b7995-dzdhv -- /bin/bash
+    $ kubectl exec -it [POD_NAME] -- /bin/bash
         # mysql --user='root' --password='root'
+                    OR
+        # mysql -u root -p
+        # Enter Password = root
 
 # Access the Web Application
     $ minikube ip
@@ -85,6 +95,5 @@
 
 # To Scale the Replicaset 
 
-    $ kubectl scale replicaset [RepliSet-name] --replicas=[numbers]
-    $ kubectl scale replicaset mysql-deployment-76796c49cb --replicas=3
-    $ kubectl scale replicaset mvcdemo-deployment-d5795f6f5 --replicas=3
+    $ kubectl scale replicaset [REPLICA_SET_NAME] --replicas=[NUMBER]
+
