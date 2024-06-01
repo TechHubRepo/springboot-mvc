@@ -9,10 +9,9 @@
 
 # Create AppData directory
 
-    $ cd ..
-    $ cd ..
-    $ sudo mkdir AppData
-    $ sudo chmod -R 777 AppData
+    $ sudo mkdir /AppData
+    $ sudo chmod -R 777 /AppData
+    $ sudo mkdir /AppData/mysql
 
 # Uninstall Minikube
 
