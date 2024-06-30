@@ -1,0 +1,4 @@
+------------------------------------------------
+   MyAccount Application Deployed Successfully
+------------------------------------------------
+       Access : http://[HOST_IP]:8080/

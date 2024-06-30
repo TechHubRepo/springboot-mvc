@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: {{.Values.pv.metadata.name}}
+  namespace: {{.Values.namespace.metadata.name}}
+spec:
+  accessModes:
+    {{- toYaml .Values.pv.spec.accessModes | nindent 8}}
+  capacity:
+    storage: {{.Values.pv.spec.capacity.storage}}
+  hostPath:
+    {{- toYaml .Values.pv.spec.hostPath | nindent 8}}
+

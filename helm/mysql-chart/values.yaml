@@ -1,0 +1,90 @@
+# Namespace
+namespace:
+  metadata:
+    name: myapps
+    labels:
+      name: mvcdemo
+
+# ConfigMap
+configmap:
+  metadata:
+    name: mysql-config
+  data:
+    hostName: mysql-service
+    portNumber: '3308'
+    databaseName: customer_service
+
+# Secret
+secret:
+  metadata:
+    name: mysql-secret
+  data:
+    username: cm9vdA==
+    password: cm9vdA==
+
+# PersistentVolume
+pv:
+  metadata:
+    name: myapps-pv
+  spec:
+    accessModes:
+      - ReadWriteMany
+    capacity:
+      storage: 4Gi
+    hostPath:
+      path: /AppData
+      type: Directory
+
+# PersistentVolumeClaim
+pvc:
+  metadata:
+    name: mysql-pvc
+  spec:
+    accessModes:
+      - ReadWriteMany
+    resources:
+      requests:
+        storage: 1Gi
+
+# Service
+service:
+  metadata:
+    name: mysql-service
+  spec:
+    type: ClusterIP
+    ports:
+      - protocol: TCP
+        port: 3308
+        targetPort: 3306
+
+# Deployment
+deployment:
+  metadata:
+    name: mysql-deployment
+  spec:
+    replicas: 1
+    selector:
+      matchLabels:
+        app: mysql
+        tier: database
+    template:
+      containers:
+        name: mysql-database-pod
+        image: mysql:8.0.36-debian
+        imagePullPolicy: Always
+        ports:
+          containerPort: 3306
+        volumeMounts:
+          name: mysql-persistent-storage
+          mountPath: /var/lib/mysql
+        env:
+          - name: MYSQL_ROOT_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: mysql-secret
+                key: password
+          - name: MYSQL_DATABASE
+            valueFrom:
+              configMapKeyRef:
+                name: mysql-config
+                key: databaseName
